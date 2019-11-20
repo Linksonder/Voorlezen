@@ -1,0 +1,15 @@
+body {
+  font-family: sans-serif;
+}
+
+/* Make content area fill the entire browser window */
+
+/* Center the content in the browser window */
+.container {
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  font-size: 3rem;
+}
