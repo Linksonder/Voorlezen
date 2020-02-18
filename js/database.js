@@ -62,7 +62,10 @@ soundService.addSound = function(id, blob) {
       var request = store.put(data);
   
       request.onsuccess = function(e) {
-        resolve(data);
+        resolve({
+          id: id,
+          blob: blob
+        });
       };
   
       request.onerror = function(e) {
