@@ -2,3 +2,22 @@
     border:1px solid black;
     margin:5px;
 }
+
+button {
+    background: #1E88E5;
+    color: white;
+    padding: 2rem 4rem;
+    border: 0;
+    font-size: 1.5rem;
+  }
+
+.book-list{
+    display:flex;
+    flex-direction: column;
+}
+
+.book-list .book{
+    border:1px solid black;
+    padding:5px;
+    margin:2px;
+}

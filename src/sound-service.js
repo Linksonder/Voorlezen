@@ -1,3 +1,5 @@
+
+
 var soundService = {};
 initIndexDB();
 
@@ -43,6 +45,10 @@ soundService.open = function() {
   
 };
 
+/**
+ * AddSound
+ * returns a blob
+ */
 soundService.addSound = function(id, blob) {
   return new Promise((resolve, reject) => {
     
@@ -76,6 +82,10 @@ soundService.addSound = function(id, blob) {
   })
 };
 
+/***
+ * DeleteSound
+ * @id the id of the sound to delete
+ */
 soundService.deleteSound = function(id) {
   return new promise((resolve, reject) => {
     var trans = soundService.db.transaction(["todo"], "readwrite");
@@ -95,7 +105,27 @@ soundService.deleteSound = function(id) {
   
 };
 
+soundService.getSound = function(key) {
+  return new Promise(function(resolve, reject) {
+    var trans = soundService.db.transaction(["sound"], "readwrite");
+    var store = trans.objectStore("sound");
+    let request = store.get(key);
+    request.onsuccess = (e) => { 
+      var sound = e.target.result;
+      if(!!sound == false)
+        return;
 
+      sound.blob = arrayBufferToBlob(sound.blob);
+      resolve(sound);
+    }
+  })
+
+}
+
+
+/**
+ * GetAllSounds()
+ */
 soundService.getAllSounds = function() {
 
 
@@ -150,7 +180,7 @@ soundService.getAllSounds = function() {
  * This scoped function initlializes IndexDB for different browsers
  */
 function initIndexDB(){
-  window.indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB;
+  //window.indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB;
 
   if ('webkitIndexedDB' in window) {
    window.IDBTransaction = window.webkitIDBTransaction;
@@ -193,3 +223,5 @@ function blobToArrayBuffer(blob) {
     reader.readAsArrayBuffer(blob);
   });
 }
+
+export default soundService;
